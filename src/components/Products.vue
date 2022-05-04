@@ -1,6 +1,10 @@
 <template>
+<!--buscador-->
+
+
+<!--cards-->
   <div class="container mb-5">
-    <h1 class="text-center mb-5">CHARACTERS RICK AND MORTY</h1>
+   
     <div class="row justify-content-center">
       <div
         class="card col-6 col-sm-2 m-3 p-0"
