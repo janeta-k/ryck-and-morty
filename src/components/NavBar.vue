@@ -12,6 +12,12 @@
           <a class="nav-link" href=""><router-link to="/">Home</router-link></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href=""><router-link to="/productos">Productos</router-link></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href=""><router-link to="/nosotros">Nosotros</router-link></a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href=""><router-link to="/login">Login</router-link></a>
         </li>
       </ul>
