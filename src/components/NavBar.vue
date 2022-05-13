@@ -1,6 +1,6 @@
 <template>
 
-<div class="mb-5 sticky-top">
+<div class=" sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container">
       <a class="navbar-brand" href="#">Rick and Morty</a>
@@ -13,10 +13,7 @@
             <a class="nav-link" href=""><router-link to="/">Home</router-link></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href=""><router-link to="/nosotros">Nosotros</router-link></a>
-          </li>
-          <li class="nav-item">
-           <a class="nav-link" href=""><router-link to="/login">Login</router-link></a>
+            <a class="nav-link" href=""><router-link to="/login">Logout</router-link></a>
           </li>
         </ul>
       </div>
@@ -26,10 +23,11 @@
 
 </template>
 
+
 <script>
-export default {
-}
+
 </script>
+
 
 <style>
 .bg-light{
