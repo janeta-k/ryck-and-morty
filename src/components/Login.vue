@@ -12,7 +12,7 @@
             <input type="password" class="form-control" placeholder="ingresa tu contraseña" v-model="password" >
         </div>
 
-        <button class="btn btn-primary" @click.prevent="validation()">
+        <button class="btn btn-warning" @click.prevent="validation()">
             Login
         </button>
     </form>
