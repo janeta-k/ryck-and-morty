@@ -1,5 +1,5 @@
 <template>
-<NavBar />
+     <NavBar/>
      <Carrusel />
      <h2 class="text-center mt-5">Personajes Rick and Morty</h2>
      <Products/>
@@ -13,10 +13,12 @@ import Carrusel from '@/components/Carrusel.vue'
 import Products from '@/components/Products.vue'
 
 export default {
+  name: 'HomeView',
+
   components:{
+    NavBar,
     Carrusel,
     Products,
-    NavBar,
     Footer,
   },
 }
