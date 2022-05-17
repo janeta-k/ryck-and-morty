@@ -1,6 +1,6 @@
 <template>
-<div>
-    <form >
+<div class="container-fluid">
+    <form class="row" >
 
         <div class="form-group">
             <label >Email:</label>
@@ -51,6 +51,10 @@ export default {
 </script>
 
 <style scoped>
-    *{background-color:darkgray}
+    *{
+         background-color:darkgray;        
+     }
+    
+
 </style>
 
