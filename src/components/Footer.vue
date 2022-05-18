@@ -59,7 +59,7 @@
   margin: 0 35px;
   margin-bottom: 15px;
   font-weight: bold;
-  color: 	#44281d	;
+  color: 	#44281d;
 }
 
 .contacto a {
@@ -74,7 +74,7 @@
 .comparte {
   text-align: center;
   font-weight: bold;
-  color: 	#44281d	;
+  color: 	#44281d;
 }
 
 .redes-sociales{
@@ -102,7 +102,7 @@
 
 .ubi h4 {
   font-weight: bold;
-  color: 	#44281d	;
+  color: 	#44281d;
 }
 
 .ubi a {
@@ -116,7 +116,7 @@
 
 /*sección copyright */
 .copy {
-  background-color: 	#44281d	; 
+  background-color: 	#44281d; 
 }
 
 .copy h4 {
