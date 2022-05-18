@@ -36,7 +36,7 @@ export default {
         validation(){
             if(this.loginData[0].password === this.password && this.loginData[0].email === this.email){
                 console.log("login")
-                this.$router.push("/")
+                this.$router.push("/home")
             }else{
                 alert("El email y/o la contraseña son incorrectos")
             }
