@@ -38,12 +38,17 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">Origen: {{ item.origin.name }}</p>
-          <p class="card-text">Estado: {{ item.status }}</p>
+          <p class="card-text">{{item.stock}}</p>
+          <p class="card-text" v-if="item.stock>5">En stock</p>
+          <p class="card-text" v-else-if="item.stock<=5 && item.stock>0">¡Queda poco stock!</p>
+          <p class="card-text" v-else>sin stock</p>
+
           <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" @click="showMore(item)" >
-              Ver detalles
+            Ver detalles
           </button>
-         <a href="#" class="card-button btn btn-primary" @click="addToCart(item)">Agregar al carrito</a>
+
+          <button href="#" class="card-button btn btn-primary" v-if="item.stock>0" @click="addToCart(item); reduceStock(item)">Agregar al carrito</button>
+          <button href="#" class="card-button btn btn-primary disabled" v-else-if="item.stock<=0" @click="addToCart(item); reduceStock(item)">Agregar al carrito</button>
         </div>
       </div>
     </div>
@@ -70,7 +75,7 @@
   </div>
 </div>
 
-<CartDetail :modalCart="carrito"/>
+<CartDetail :modalCart="carrito" :totalCart="precioTotal" @click1="disminuir" @click2="aumentar" @click3="quitar" @vaciar ="vaciarCart" @reduceStock="dropStockCart"/>
   </div>
 </template>
 
@@ -80,8 +85,6 @@
 
 import CartDetail from '@/components/CartDetail.vue'
 
-
-
 export default {
   
   name: 'Products',
@@ -90,38 +93,36 @@ export default {
     CartDetail
   },
 
-
   data() {
     return {
-      
       personajes:[],
-
       carrito:[],
-
       buscar: "",
-
+      precioTotal: 0,
       modal:{
         name: "",
         origin: "",
         status:"",
         gender:""
       },
-
       modalCart:{
         name:'',
         cantidad:'',
       },
-
     };
-    
-    
   },
 
-  created(){
-   fetch("json/ryckAndMorty.json")
-   .then(response => response.json())
-   .then(datos => this.personajes = datos.characters)
+  async created(){
+    try{
+      const respuesta = await fetch("json/ryckAndMorty.json");
+      const datosApi = await respuesta.json();
+      this.personajes = datosApi.characters
+
+    }catch(error){
+      console.log(error.message);
+    }
   },
+  
 
   methods:{
 
@@ -137,9 +138,9 @@ export default {
      console.log(object)
     },
 
-   //método para agregar al carrito y aumentar la cantidad del producto
+    //método para agregar los personajes al carrito y aumentar la cantidad del producto
     addToCart(object){
-     let personajes = this.personajes.find(item => item==object)
+     let personajes = this.personajes.find(item => item == object)
      let booleano = this.carrito.some(item => item == object)
 
       if(booleano){
@@ -149,21 +150,69 @@ export default {
         console.log(this.carrito.push(personajes))
         console.log(this.carrito)
       }
+      this.precio()
     },
 
-//método para disminuir la cantidad 
-/*
+    /* --- métodos para stock ---*/
+
+    //método para descontar stock onclick de card "items"
+    reduceStock(stock){
+      let stockPersonajes = this.personajes.find(item => item == stock)      
+      stockPersonajes.stock--
+    },
+
+    //método para descontar stock "carrito"
+    dropStockCart(elemento){
+      let stockCarrito = this.carrito.find(item => item == elemento)
+      stockCarrito.stock--
+    },
+
+  /* --- Métodos para el carrito --- */
+
+    //método para disminuir la cantidad de productos (-) y restaurar el stock de este
     disminuir(elemento){
       let personajes = this.personajes.find(item => item == elemento)
-     let booleano = this.carrito.some(item => item == elemento)
+      personajes.cantidad--
 
-     if(booleano){
-       return personajes.cantidad -= 1
-     }
-     
+      let stockCarrito = this.carrito.find(item => item == elemento)
+      stockCarrito.stock++
+      
+        if(personajes.cantidad < 1){
+          personajes.cantidad = 1
+          stockCarrito.stock = 12
+          this.quitar(elemento)
+        }
+      
+      this.precio()
     },
-*/
-    
+
+    //método para aumentar la cantidad (+)
+    aumentar(elemento){
+      let personajesCarrito = this.carrito.find(item => item == elemento)
+      personajesCarrito.cantidad++
+      this.precio()
+    },
+
+    //método para quitar los productos (x)
+    quitar(elemento){
+      let index = this.carrito.findIndex(item => item == elemento);
+      this.carrito.splice(index, 1);
+      this.precio()
+    },
+
+    //método para calcular el precio total
+    precio(){
+      this.precioTotal = 0
+      for (let i=0; i<this.carrito.length; i++){
+      this.precioTotal += this.carrito[i].precio*this.carrito[i].cantidad;
+      }
+    },
+
+    //método para vaciar el carrito
+    vaciarCart(){
+      this.carrito = []
+      this.precio()
+    },
   },
 
   computed: {
@@ -174,7 +223,6 @@ export default {
       });
     },
   },
-
 };
 </script>
 

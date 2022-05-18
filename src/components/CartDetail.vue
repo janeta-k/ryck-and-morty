@@ -20,18 +20,24 @@
         
         <div class="card-body">
           <h5 class="card-title">{{elemento.name}}</h5>
-          <p class="card-text">{{elemento.cantidad}}</p>
-          <a href="#" class="btn btn-primary" >-</a>
-          <a href="#" class="btn btn-primary" >+</a>
-          <a href="#" class="btn btn-primary" >x</a>
+          <p class="card-text">cantidad: {{elemento.cantidad}}</p>
+          <p class="card-text">stock: {{elemento.stock}}</p>
+          <button href="#" class="btn btn-primary" @click="disminuir(elemento)">-</button>
+
+          <button href="#" class="btn btn-primary" @click="aumentar(elemento); reduceStock(elemento)" v-if="elemento.stock>0">+</button>
+          <button href="#" class="btn btn-primary disabled" @click="aumentar(elemento); reduceStock(elemento)" v-else-if="elemento.stock<=0">+</button>
+
+          <button href="#" class="btn btn-primary" @click="quitar(elemento)">x</button>
+     
         </div>
-      <!-- @click="disminuir(elemento)"  @click="aumentar(elemento)"  @click="quitar(elemento)"-->
 
       </div>  
 
     </div>
 
     <div class="modal-footer">
+      <p>total: {{totalCart}}</p>
+      <button type="button" class="btn btn-primary" @click="vaciarCart()">vaciar carrito</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     </div>
   </div>
@@ -50,22 +56,31 @@ export default{
     modalCart:{
       type: Array,
       required: true,
+    },
+    totalCart:{
+      type: Number,
+      required: true,
     }
   },
-/*
+
   methods:{
     disminuir(elemento){
-      let personajes = this.personajes.find(item => item == elemento)
-     let booleano = this.carrito.some(item => item == elemento)
-
-     if(booleano){
-       return personajes.cantidad -= 1
-     }
+     this.$emit("click1", elemento )
     },
-
-
-  }
-  */
+    aumentar(elemento){
+      this.$emit("click2", elemento)
+    },
+    quitar(elemento){
+      this.$emit("click3", elemento)
+    },
+    vaciarCart(){
+      this.$emit("vaciar")
+    },
+    reduceStock(elemento){
+      this.$emit("reduceStock", elemento)
+    },
+  },
+  
 }
 
 

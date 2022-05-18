@@ -42,11 +42,17 @@ export default {
             }
         }
     },
-    mounted(){
-        fetch('json/auth.json')
-        .then(respuesta => respuesta.json())
-        .then(datosAuth => this.loginData = datosAuth.data)
-    },
+
+    async mounted(){
+    try{
+      const respuesta = await fetch("json/auth.json");
+      const datosAuth = await respuesta.json();
+      this.loginData = datosAuth.data
+      
+    }catch(error){
+      console.log(error.message);
+    }
+}
 }
 </script>
 
