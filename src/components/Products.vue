@@ -143,12 +143,14 @@ export default {
      let personajes = this.personajes.find(item => item == object)
      let booleano = this.carrito.some(item => item == object)
 
-      if(booleano){
-        console.log(personajes.cantidad += 1) 
-        console.log(personajes.cantidad)
+      if(!booleano){
+        personajes.cantidad = 1 
+        this.carrito.push(personajes)
+        
       }else{
-        console.log(this.carrito.push(personajes))
-        console.log(this.carrito)
+        if(personajes.stock > 0){
+          personajes.cantidad++
+        }
       }
       this.precio()
     },
@@ -177,9 +179,7 @@ export default {
       let stockCarrito = this.carrito.find(item => item == elemento)
       stockCarrito.stock++
       
-        if(personajes.cantidad < 1){
-          personajes.cantidad = 1
-          stockCarrito.stock = 12
+        if(personajes.cantidad <= 0){
           this.quitar(elemento)
         }
       
@@ -195,10 +195,15 @@ export default {
 
     //método para quitar los productos (x)
     quitar(elemento){
+      let quitado = this.carrito.find(item2 => item2 == elemento)
+      quitado.stock += quitado.cantidad
+
       let index = this.carrito.findIndex(item => item == elemento);
       this.carrito.splice(index, 1);
-      this.precio()
+      
+      this.precio() 
     },
+
 
     //método para calcular el precio total
     precio(){
@@ -210,6 +215,11 @@ export default {
 
     //método para vaciar el carrito
     vaciarCart(){
+      this.carrito.forEach(element => {
+      let perrito = this.personajes.find(item => item.id == element.id)
+      perrito.stock += perrito.cantidad
+      });
+
       this.carrito = []
       this.precio()
     },

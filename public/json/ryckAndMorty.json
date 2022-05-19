@@ -2,7 +2,7 @@
 { "characters":[
    {
     "id": 1,
-    "cantidad": 1,
+    "cantidad": 0,
     "precio":100,
     "stock": 12,
     "name": "Rick Sanchez",
@@ -19,7 +19,7 @@
 
     {
       "id": 2,
-      "cantidad":1,
+      "cantidad":0,
       "precio":100,
       "stock": 12,
     "name": "Morty Smith",
@@ -36,7 +36,7 @@
 
     {
     "id": 3,
-    "cantidad":1,
+    "cantidad":0,
     "precio":100,
     "stock": 12,
     "name": "Summer Smith",
