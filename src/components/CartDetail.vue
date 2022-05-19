@@ -23,7 +23,7 @@
             <div class="card-body">
               <h5 class="card-title">{{elemento.name}}</h5>
               <p class="card-text mb-1"><strong>Cantidad:</strong> {{elemento.cantidad}}</p>
-              <p class="card-text mb-2"><strong>Precio:</strong> ${{elemento.precio}}</p>
+              <p class="card-text mb-2"><strong>Precio c/u:</strong> ${{elemento.precio}}</p>
               <div class="btn-group" role="group" aria-label="Basic example">
               <button href="#" class="btn btn-primary" @click="disminuir(elemento)">-</button>
 
@@ -41,7 +41,7 @@
 
     <div class="modal-footer">
       
-      <p >Total: {{totalCart}}</p>
+      <p >Total: ${{totalCart}}</p>
       <button type="button" class="btn btn-primary" @click="vaciarCart()">vaciar carrito</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     </div>
