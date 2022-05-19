@@ -40,9 +40,8 @@
     </div>
 
     <div class="modal-footer">
-      <div class="d-inline-flex p-2">
-        <p >total: {{totalCart}}</p>
-      </div>
+      
+      <p >Total: {{totalCart}}</p>
       <button type="button" class="btn btn-primary" @click="vaciarCart()">vaciar carrito</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     </div>
