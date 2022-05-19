@@ -13,30 +13,36 @@
 <!--cuerpo del modal-->
     <div class="modal-body">
 
-    <!--card para los productos que se agregen al carrito-->
-      <div class="card " v-for="(elemento, index) in modalCart" :key="index" style="width: 18rem;">
+    <!--card para los productos que se agreguen al carrito-->
+    <div class="card mb-1 p-0" style="max-width: 100%;" v-for="(elemento, index) in modalCart" :key="index">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img v-bind:src="elemento.image" class="img-fluid rounded-center">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{elemento.name}}</h5>
+              <p class="card-text mb-1"><strong>Cantidad:</strong> {{elemento.cantidad}}</p>
+              <p class="card-text mb-2"><strong>Precio:</strong> ${{elemento.precio}}</p>
+              <div class="btn-group" role="group" aria-label="Basic example">
+              <button href="#" class="btn btn-primary" @click="disminuir(elemento)">-</button>
 
-        <img src="#" class="card-img-top" alt="img">
-        
-        <div class="card-body">
-          <h5 class="card-title">{{elemento.name}}</h5>
-          <p class="card-text">cantidad: {{elemento.cantidad}}</p>
-          <p class="card-text">stock: {{elemento.stock}}</p>
-          <button href="#" class="btn btn-primary" @click="disminuir(elemento)">-</button>
+              <button href="#" class="btn btn-primary" @click="aumentar(elemento); reduceStock(elemento)" v-if="elemento.stock>0">+</button>
+              <button href="#" class="btn btn-primary disabled" @click="aumentar(elemento); reduceStock(elemento)" v-else-if="elemento.stock<=0">+</button>
 
-          <button href="#" class="btn btn-primary" @click="aumentar(elemento); reduceStock(elemento)" v-if="elemento.stock>0">+</button>
-          <button href="#" class="btn btn-primary disabled" @click="aumentar(elemento); reduceStock(elemento)" v-else-if="elemento.stock<=0">+</button>
-
-          <button href="#" class="btn btn-primary" @click="quitar(elemento)">x</button>
-     
+              <button href="#" class="btn btn-primary" @click="quitar(elemento)">x</button>
+          </div>
+            </div>
+          </div>
         </div>
-
-      </div>  
+      </div>
 
     </div>
 
     <div class="modal-footer">
-      <p>total: {{totalCart}}</p>
+      <div class="d-inline-flex p-2">
+        <p >total: {{totalCart}}</p>
+      </div>
       <button type="button" class="btn btn-primary" @click="vaciarCart()">vaciar carrito</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     </div>
@@ -82,8 +88,4 @@ export default{
   },
   
 }
-
-
-
-
 </script>

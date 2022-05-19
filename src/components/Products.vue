@@ -37,10 +37,10 @@
           v-bind:alt="item.name"
         />
         <div class="card-body">
-          <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">{{item.stock}}</p>
-          <p class="card-text" v-if="item.stock>5">En stock</p>
-          <p class="card-text" v-else-if="item.stock<=5 && item.stock>0">¡Queda poco stock!</p>
+          <h5 class="card-title text-center">{{ item.name }}</h5>
+           <p class="card-text text-center">Precio: ${{item.precio}}</p>
+          <p class="card-text" v-if="item.stock>5">En stock: {{item.stock}}</p>
+          <p class="card-text" v-else-if="item.stock<=5 && item.stock>0">¡Quedan solo {{item.stock}} en stok!</p>
           <p class="card-text" v-else>sin stock</p>
 
           <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" @click="showMore(item)" >
